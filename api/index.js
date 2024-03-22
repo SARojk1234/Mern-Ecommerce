@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'
+import userRoutes from './route/user.route.js'
 dotenv.config();
 
 
@@ -16,3 +17,5 @@ mongoose.connect(process.env.MONGO).then(()=>{
 .catch((err)=>{
     console.log(err);
 })
+
+app.use('/api/user', userRoutes);
