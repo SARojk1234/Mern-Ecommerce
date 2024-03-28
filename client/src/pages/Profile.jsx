@@ -10,6 +10,7 @@ import {
   deleteFailure,
   deleteStart,
   deleteSuccess,
+  signOutStart,
 } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 
@@ -96,6 +97,23 @@ uploadTask.on(
       
     }
   }
+  const handleSignOut = async()=>{
+    try {
+      dispatch(signOutStart())
+      const res = await fetch('/api/auth/signout');
+      const data = await res.json();
+      if(data.success === false){
+        dispatch(deleteFailure(data.message))
+        return;
+      }
+      dispatch(deleteSuccess(data));
+
+      
+    } catch (error) {
+      dispatch(deleteFailure(data.message))
+      
+    }
+  }
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl text-center font-semibold my-7'>Profile</h1>
@@ -122,7 +140,7 @@ uploadTask.on(
       </form>
       <div className='flex justify-between mt-5'>
         <span onClick={handleDeleteUser} className='text-red-700 cursor-pointer'>Delete Account</span>
-        <span className='text-green-700 cursor-pointer'>Sign Out</span>
+        <span onClick={handleSignOut} className='text-green-700 cursor-pointer'>Sign Out</span>
       </div>
       <p className='text-red-700 mt-5'>{error ? error : ''}</p>
       <p className='text-green-700 mt-5'>
