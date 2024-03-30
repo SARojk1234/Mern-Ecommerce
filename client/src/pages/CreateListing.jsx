@@ -37,7 +37,7 @@ export default function CreateListing() {
             }
         
         Promise.all(promises).then((urls)=>{
-            setFormData({...formData, imageUrls:formData.imageUrls.concat(urls)
+            setFormData({...formData, imageUrls:formData.imageUrls.concat(urls),
             });
             setImageUploadError(false);
             setUpload(false);
