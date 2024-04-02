@@ -182,7 +182,7 @@ export default function CreateListing() {
             className='border p-3 rounded-lg'
             id='name'
             maxLength='62'
-            minLength='10'
+            minLength='5'
             required
             onChange={handleChange}
             value={formData.name}
@@ -297,7 +297,9 @@ export default function CreateListing() {
               />
               <div className='flex flex-col items-center'>
                 <p>Regular price</p>
-                <span className='text-xs'>($ / month)</span>
+                {formData.type === 'rent' && (
+                  <span className='text-xs'>($ / month)</span>
+                )}
               </div>
             </div>
             {formData.offer && (
@@ -314,7 +316,9 @@ export default function CreateListing() {
                 />
                 <div className='flex flex-col items-center'>
                   <p>Discounted price</p>
+                  {formData.type === 'rent' && (
                   <span className='text-xs'>($ / month)</span>
+                )}
                 </div>
               </div>
             )}
